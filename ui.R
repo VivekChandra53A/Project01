@@ -37,7 +37,7 @@ dashboardPage(
     tabItem(tabName = "viz",
             tabBox(id="t2", width=12,
             tabPanel(title = "Registration Trends by State", value = "trends",h4("tabpanel-1 placeholder UI")),
-            tabPanel(title = "Distribution", value = "distro",h4("tabpanel-2 placeholder UI")),
+            tabPanel(title = "Distribution", value = "distro", plotlyOutput("histplot")),
             tabPanel(title = "Correlation Matrix",h4("tabpanel-3 placeholder UI")),
             tabPanel(title = "Relationship among total MSME Registration and Cardinal Direction", value = "trends",h4("tabpanel-4 placeholder UI"))
             ))
