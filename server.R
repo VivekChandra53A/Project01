@@ -38,4 +38,16 @@ function(input, output, session){
              yaxis = list(title="Frequency"))
     
   })
+  
+  #scatter
+  output$scatter <- renderPlotly({
+    p = my_data %>%
+      ggplot(aes(x=get(input$var3), y=get(input$var4))) +
+      geom_point() +
+      geom_smooth(method =get(input$fit)) +
+      labs(title = paste("Relation b/w", input$var3, "and", input$var4), x = input$var3, y=input$var4) +
+      theme(plot.title = element_textbox(size = 10,halign = 0.5))
+    
+    ggplotly(p)
+  })
 }

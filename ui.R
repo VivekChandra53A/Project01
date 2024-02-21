@@ -1,5 +1,8 @@
 library(shiny)
 library(shinydashboard)
+c1 = my_data %>%
+  select(-State) %>%
+  names()
 
 dashboardPage(
   dashboardHeader(title = "Services and Manufacturing MSME Registration Till 19Th Feb 2024",titleWidth = 650,
@@ -13,8 +16,10 @@ dashboardPage(
       #first menuitem
       menuItem("Dataset", tabName = "data", icon = icon("database")),
       menuItem(text = "visualization", tabName = "viz", icon = icon("chart-line")),
-      selectInput(inputId = "var1", label = "Select the Variable", choices = c1, selected ="Msme_Service"))
-  ),
+      selectInput(inputId = "var1", label = "Select the Variable", choices = c1, selected ="Micro_Service"),
+      selectInput(inputId = "var3", label = "Select the x Variable", choices = c1, selected ="Micro_Service"),
+      selectInput(inputId = "var4", label = "Select the y Variable", choices = c1, selected ="GSDP_USD_Billion"
+  ))),
   dashboardBody(
     tabItems(
       # first tab item
@@ -39,6 +44,8 @@ dashboardPage(
             tabPanel(title = "Registration Trends by State", value = "trends",h4("tabpanel-1 placeholder UI")),
             tabPanel(title = "Distribution", value = "distro", plotlyOutput("histplot")),
             tabPanel(title = "Correlation Matrix",h4("tabpanel-3 placeholder UI")),
-            tabPanel(title = "Relationship among total MSME Registration and Cardinal Direction", value = "trends",h4("tabpanel-4 placeholder UI"))
+            tabPanel(title = "Relationship among total MSME Registration and Cardinal Direction", value = "trends",
+                     radioButtons(inputId ="fit" , label = "Select smooth method" , choices = c("loess", "lm"), selected = "lm" , inline = TRUE),
+                     plotlyOutput("Scatter"))
             ))
     )))
